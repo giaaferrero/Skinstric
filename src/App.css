@@ -1013,3 +1013,22 @@ footer p {
     animation: none;
   }
 }
+.loading-text {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.loading-text p {
+  margin-bottom: 10px;
+  color: #9ea3ab;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.loading-text h2 {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -2px;
+}

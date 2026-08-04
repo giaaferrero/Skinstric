@@ -12,15 +12,19 @@ function LoadingPage() {
 
       <main className="loading-page">
         <div className="loading-content">
-          <p>PLEASE WAIT</p>
+          <div className="question-diamond question-diamond-one"></div>
+          <div className="question-diamond question-diamond-two"></div>
+          <div className="question-diamond question-diamond-three"></div>
 
-          <h2>
-            ANALYZING
-            <br />
-            YOUR IMAGE
-          </h2>
+          <div className="loading-text">
+            <p>PLEASE WAIT</p>
 
-          <div className="loading-spinner"></div>
+            <h2>
+              PREPARING
+              <br />
+              YOUR ANALYSIS...
+            </h2>
+          </div>
         </div>
       </main>
     </>

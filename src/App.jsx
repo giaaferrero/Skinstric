@@ -143,6 +143,7 @@ function App() {
       <ResultsPage
         results={demographicResults}
         onBack={() => setCurrentPage("dashboard")}
+        onHome={() => setCurrentPage("intro")}
       />
     );
   }
