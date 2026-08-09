@@ -11,20 +11,31 @@ function LoadingPage() {
       </header>
 
       <main className="loading-page">
-        <div className="loading-content">
-          <div className="question-diamond question-diamond-one"></div>
-          <div className="question-diamond question-diamond-two"></div>
-          <div className="question-diamond question-diamond-three"></div>
+        <div className="loading-wrapper">
+          <div className="loading-diamonds">
+            <div className="diamond diamond-1"></div>
+            <div className="diamond diamond-2"></div>
+            <div className="diamond diamond-3"></div>
+            <div className="diamond diamond-4"></div>
 
-          <div className="loading-text">
-            <p>PLEASE WAIT</p>
-
-            <h2>
-              PREPARING
-              <br />
-              YOUR ANALYSIS...
-            </h2>
+            <div className="camera-circle">
+              📷
+            </div>
           </div>
+
+          <p className="loading-status">
+            SETTING UP CAMERA...
+          </p>
+
+          <p className="loading-help">
+            TO GET BETTER RESULTS MAKE SURE TO HAVE
+            <br />
+            ◇ NEUTRAL EXPRESSION
+            &nbsp;&nbsp;&nbsp;
+            ◇ FRONTAL POSE
+            &nbsp;&nbsp;&nbsp;
+            ◇ ADEQUATE LIGHTING
+          </p>
         </div>
       </main>
     </>
