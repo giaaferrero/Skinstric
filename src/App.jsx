@@ -205,15 +205,8 @@ function App() {
 
       <footer>
         <p>
-          SKINSTRIC DEVELOPED AN A.I.
-          <br />
-          THAT CREATES
-          <br />
-          A HIGHLY-PERSONALISED
-          <br />
-          ROUTINE TAILORED TO
-          <br />
-          WHAT YOUR SKIN NEEDS.
+          SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALISED
+          ROUTINE TAILORED TO WHAT YOUR SKIN NEEDS.
         </p>
       </footer>
     </>

@@ -1,3 +1,5 @@
+import { FiCamera } from "react-icons/fi";
+
 function LoadingPage() {
   return (
     <>
@@ -19,7 +21,7 @@ function LoadingPage() {
             <div className="diamond diamond-4"></div>
 
             <div className="camera-circle">
-              📷
+              <FiCamera size={30} strokeWidth={1.4} />
             </div>
           </div>
 

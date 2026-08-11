@@ -100,41 +100,100 @@ main {
 .hero {
   position: relative;
   width: 100%;
+  min-height: calc(100vh - 64px);
   display: grid;
-  grid-template-columns: 380px minmax(420px, 1fr) 380px;
+  grid-template-columns: 300px minmax(420px, 1fr) 300px;
   align-items: center;
+  overflow: hidden;
 }
 
 .hero h1 {
   position: relative;
   z-index: 3;
   text-align: center;
-  font-size: clamp(64px, 5.4vw, 88px);
+  font-size: clamp(68px, 5.6vw, 90px);
   line-height: 0.9;
   font-weight: 400;
   letter-spacing: -5px;
+  transition: transform 500ms ease;
 }
 
 .arrow-left,
 .arrow-right {
   position: relative;
-  height: 320px;
+  height: 100%;
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  transition: opacity 350ms ease;
 }
 
 .arrow-left {
   justify-content: flex-start;
-  padding-left: 72px;
+  padding-left: 80px;
 }
 
 .arrow-right {
   justify-content: flex-end;
-  padding-right: 72px;
+  padding-right: 80px;
   border: none;
   background: transparent;
   cursor: pointer;
+}
+
+/*
+  Reference landing-page side shapes:
+  a 400px square rotated 45deg, centered on each viewport edge.
+  This puts the inside point about 283px into the page.
+*/
+.arrow-left::before,
+.arrow-right::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  width: 400px;
+  height: 400px;
+  border: 1px dashed #cfd2d7;
+  opacity: 0.8;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.arrow-left::before {
+  left: -200px;
+}
+
+.arrow-right::before {
+  right: -200px;
+}
+
+/* Old helper lines are not needed when using the rotated squares. */
+.line-left-top,
+.line-left-bottom,
+.line-right-top,
+.line-right-bottom {
+  display: none;
+}
+
+/* Small diamond arrow buttons like the reference. */
+.arrow-left .circle,
+.arrow-right .circle {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #1a1b1c;
+  border-radius: 0;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  transform: rotate(45deg);
+}
+
+.arrow-left .circle svg,
+.arrow-right .circle svg {
+  width: 12px;
+  height: 12px;
+  transform: rotate(-45deg);
 }
 
 .arrow-left p,
@@ -146,62 +205,47 @@ main {
   text-transform: uppercase;
 }
 
-.line-left-top,
-.line-left-bottom,
-.line-right-top,
-.line-right-bottom {
-  position: absolute;
-  width: 240px;
-  border-top: 1px dashed #d4d4d4;
-  transition: width 500ms ease;
+/* Hover behavior from the reference. */
+.hero:has(.arrow-left:hover) h1 {
+  transform: translateX(140px);
 }
 
-.line-left-top,
-.line-left-bottom {
-  left: 72px;
-  transform-origin: right center;
+.hero:has(.arrow-left:hover) .arrow-right {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.line-left-top {
-  transform: rotate(-35deg);
+.hero:has(.arrow-right:hover) h1 {
+  transform: translateX(-140px);
 }
 
-.line-left-bottom {
-  transform: rotate(35deg);
-}
-
-.line-right-top,
-.line-right-bottom {
-  right: 72px;
-  transform-origin: left center;
-}
-
-.line-right-top {
-  transform: rotate(35deg);
-}
-
-.line-right-bottom {
-  transform: rotate(-35deg);
-}
-
-.arrow-right:hover .line-right-top,
-.arrow-right:hover .line-right-bottom {
-  width: 280px;
+.hero:has(.arrow-right:hover) .arrow-left {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ================= LANDING FOOTER ================= */
 
 footer {
-  width: 100%;
-  padding: 0 28px 24px;
+  position: fixed;
+  left: 40px;
+  bottom: 60px;
+  z-index: 15;
+  width: 300px;
+  padding: 0;
 }
 
 footer p {
-  max-width: 220px;
+  width: 300px;
+  max-width: 300px;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 11px;
-  line-height: 17px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
+
 /* ================= QUESTION PAGES ================= */
 
 .single-question-page {
@@ -403,6 +447,7 @@ footer p {
   position: absolute;
   top: 34px;
   left: 32px;
+  z-index: 5;
 }
 
 .upload-heading p {
@@ -419,38 +464,64 @@ footer p {
 }
 
 .upload-options {
-  width: min(900px, 88vw);
+  width: min(1040px, 92vw);
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  gap: 80px;
+  grid-template-columns: repeat(2, 1fr);
   align-items: center;
+  justify-items: center;
+  gap: 110px;
 }
 
 .upload-option {
-  min-height: 300px;
-  border: 1px dashed #a0a4ab;
+  position: relative;
+  width: 360px;
+  height: 360px;
+  border: none;
   background: transparent;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  text-align: center;
   cursor: pointer;
-  transform: rotate(45deg);
+  isolation: isolate;
 }
 
-.upload-option > * {
-  transform: rotate(-45deg);
+.upload-option::before,
+.upload-option::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 245px;
+  height: 245px;
+  border: 1px dashed #cfd2d7;
+  opacity: 0.9;
+  pointer-events: none;
+  transition: transform 500ms ease, opacity 500ms ease;
 }
 
-.upload-option:hover {
-  background: #f5f5f5;
+.upload-option::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.upload-option::after {
+  transform: translate(-50%, -50%) rotate(58deg);
+  opacity: 0.65;
+}
+
+.upload-option:hover::before {
+  transform: translate(-50%, -50%) rotate(50deg) scale(1.03);
+}
+
+.upload-option:hover::after {
+  transform: translate(-50%, -50%) rotate(64deg) scale(1.03);
+  opacity: 0.55;
 }
 
 .upload-icon {
-  width: 72px;
-  height: 72px;
+  position: relative;
+  z-index: 3;
+  width: 74px;
+  height: 74px;
   border: 1px solid #1a1b1c;
   border-radius: 50%;
   display: grid;
@@ -458,13 +529,62 @@ footer p {
   background: #ffffff;
 }
 
-.upload-option span {
-  font-size: 12px;
-  line-height: 17px;
+.upload-icon::before {
+  content: "";
+  position: absolute;
+  width: 205px;
+  height: 205px;
+  border: 1px dashed #d9dbe0;
+  opacity: 0.35;
+  transform: rotate(72deg);
+  pointer-events: none;
+}
+
+.upload-option > span {
+  position: absolute;
+  z-index: 4;
+  width: 145px;
+  font-size: 11px;
+  line-height: 15px;
   font-weight: 600;
+  text-align: left;
+}
+
+.upload-option:first-child > span {
+  left: 300px;
+  top: 157px;
+}
+
+.upload-option:first-child > span::before {
+  content: "";
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 13px;
+  width: 94px;
+  border-top: 1px solid #1a1b1c;
+  transform: rotate(-23deg);
+  transform-origin: right center;
+}
+
+.upload-option:nth-child(2) > span {
+  right: 300px;
+  top: 157px;
+  text-align: right;
+}
+
+.upload-option:nth-child(2) > span::before {
+  content: "";
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 13px;
+  width: 94px;
+  border-top: 1px solid #1a1b1c;
+  transform: rotate(23deg);
+  transform-origin: left center;
 }
 
 .image-preview-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -482,6 +602,111 @@ footer p {
   background: transparent;
   font-size: 11px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= CAMERA SETUP ================= */
+
+.camera-setup {
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-setup-diamonds {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: grid;
+  place-items: center;
+}
+
+.camera-setup-diamond {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px dashed #cfd2d7;
+  opacity: 0.45;
+}
+
+.camera-setup-diamond.diamond-one {
+  transform: rotate(45deg);
+}
+
+.camera-setup-diamond.diamond-two {
+  transform: rotate(58deg);
+  opacity: 0.32;
+}
+
+.camera-setup-diamond.diamond-three {
+  transform: rotate(72deg);
+  opacity: 0.22;
+}
+
+.camera-setup-icon {
+  position: relative;
+  z-index: 3;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #1a1b1c;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+}
+
+.camera-setup > p {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.camera-tips {
+  margin-top: 56px;
+  text-align: center;
+  color: #72767d;
+  font-size: 9px;
+  line-height: 20px;
+}
+
+.camera-tips span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ================= LIVE CAMERA ================= */
+
+.camera-view {
+  width: min(760px, 88vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.camera-video {
+  width: 100%;
+  max-height: 560px;
+  background: #111;
+  object-fit: cover;
+}
+
+.camera-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.camera-actions button {
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   cursor: pointer;
 }
 
@@ -597,48 +822,107 @@ footer p {
   position: relative;
   width: 500px;
   height: 500px;
-  display: grid;
-  grid-template-columns: repeat(2, 170px);
-  grid-template-rows: repeat(2, 170px);
-  justify-content: center;
-  align-content: center;
-  gap: 0;
-  transform: rotate(45deg);
 }
 
-.dashboard-center::before {
+.dashboard-center::before,
+.dashboard-center::after {
   content: "";
   position: absolute;
-  inset: 34px;
-  border: 2px dotted #c8c8c8;
+  left: 50%;
+  top: 50%;
+  border: 1px dashed #d6d8dc;
   pointer-events: none;
 }
 
+.dashboard-center::before {
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  opacity: 0.8;
+}
+
+.dashboard-center::after {
+  width: 410px;
+  height: 410px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  opacity: 0.38;
+}
+
 .dashboard-tile {
-  width: 170px;
-  height: 170px;
-  margin: 0;
+  position: absolute;
+  width: 145px;
+  height: 145px;
   border: none;
-  outline: 1px solid transparent;
-  background: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #f1f1f1;
+  display: grid;
+  place-items: center;
   text-align: center;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
   cursor: pointer;
+  transform: rotate(45deg);
+  transition: background 180ms ease, transform 180ms ease;
+  z-index: 2;
+}
+
+.dashboard-tile span {
+  display: block;
   transform: rotate(-45deg);
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 600;
 }
 
 .dashboard-tile:hover {
-  background: #e6e6e6;
+  background: #e7e7e7;
 }
 
 .dashboard-tile.active {
   background: #d1d4da;
 }
+
+.dashboard-tile:active {
+  transform: rotate(45deg) scale(0.98);
+}
+
+.dashboard-demographics {
+  left: 50%;
+  top: 90px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.dashboard-demographics:active {
+  transform: translateX(-50%) rotate(45deg) scale(0.98);
+}
+
+.dashboard-skin {
+  left: 105px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.dashboard-skin:active {
+  transform: translateY(-50%) rotate(45deg) scale(0.98);
+}
+
+.dashboard-cosmetic {
+  right: 105px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.dashboard-cosmetic:active {
+  transform: translateY(-50%) rotate(45deg) scale(0.98);
+}
+
+.dashboard-weather {
+  left: 50%;
+  bottom: 90px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.dashboard-weather:active {
+  transform: translateX(-50%) rotate(45deg) scale(0.98);
+}
+
 /* ================= RESULTS PAGE ================= */
 
 .results-page {
@@ -833,23 +1117,6 @@ footer p {
     padding-right: 36px;
   }
 
-  .line-left-top,
-  .line-left-bottom,
-  .line-right-top,
-  .line-right-bottom {
-    width: 180px;
-  }
-
-  .line-left-top,
-  .line-left-bottom {
-    left: 36px;
-  }
-
-  .line-right-top,
-  .line-right-bottom {
-    right: 36px;
-  }
-
   .results-layout {
     grid-template-columns: 150px minmax(320px, 1fr);
   }
@@ -950,14 +1217,42 @@ footer p {
   .dashboard-center {
     width: 330px;
     height: 330px;
-    grid-template-columns: repeat(2, 115px);
-    grid-template-rows: repeat(2, 115px);
   }
 
   .dashboard-tile {
-    width: 115px;
-    height: 115px;
+    width: 96px;
+    height: 96px;
+  }
+
+  .dashboard-tile span {
     font-size: 9px;
+    line-height: 12px;
+  }
+
+  .dashboard-demographics {
+    top: 57px;
+  }
+
+  .dashboard-skin {
+    left: 69px;
+  }
+
+  .dashboard-cosmetic {
+    right: 69px;
+  }
+
+  .dashboard-weather {
+    bottom: 57px;
+  }
+
+  .dashboard-center::before {
+    width: 240px;
+    height: 240px;
+  }
+
+  .dashboard-center::after {
+    width: 275px;
+    height: 275px;
   }
 
   .results-page {

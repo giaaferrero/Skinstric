@@ -24,28 +24,42 @@ function DashboardPage({ onBack, onDemographics }) {
         </div>
 
         <div className="dashboard-center">
-          <div
-            className="dashboard-tile active"
+          <button
+            className="dashboard-tile dashboard-demographics active"
+            type="button"
             onClick={onDemographics}
           >
-            DEMOGRAPHICS
-          </div>
+            <span>DEMOGRAPHICS</span>
+          </button>
 
-          <div className="dashboard-tile">
-            COSMETIC
-            <br />
-            CONCERNS
-          </div>
+          <button
+            className="dashboard-tile dashboard-skin"
+            type="button"
+          >
+            <span>
+              SKIN TYPE
+              <br />
+              DETAILS
+            </span>
+          </button>
 
-          <div className="dashboard-tile">
-            SKIN TYPE
-            <br />
-            DETAILS
-          </div>
+          <button
+            className="dashboard-tile dashboard-cosmetic"
+            type="button"
+          >
+            <span>
+              COSMETIC
+              <br />
+              CONCERNS
+            </span>
+          </button>
 
-          <div className="dashboard-tile">
-            WEATHER
-          </div>
+          <button
+            className="dashboard-tile dashboard-weather"
+            type="button"
+          >
+            <span>WEATHER</span>
+          </button>
         </div>
 
         <button
@@ -60,10 +74,7 @@ function DashboardPage({ onBack, onDemographics }) {
           <span>BACK</span>
         </button>
 
-        <button
-          className="dashboard-next"
-          type="button"
-        >
+        <button className="dashboard-next" type="button">
           <span>GET SUMMARY</span>
 
           <div className="circle">
