@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import LeftButton from "./assets/buttin-icon-shrunk.svg";
+import RightButton from "./assets/buttin-icon-shrunk right.svg";
+
 import NamePage from "./components/NamePage";
 import LocationPage from "./components/LocationPage";
 import UploadPage from "./components/UploadPage";
@@ -165,9 +167,11 @@ function App() {
             <div className="line-left-top"></div>
             <div className="line-left-bottom"></div>
 
-            <div className="circle">
-              <FiArrowLeft size={14} strokeWidth={1.5} />
-            </div>
+           <img
+  className="figma-arrow-button left-button"
+  src={LeftButton}
+  alt="Discover A.I."
+/>
 
             <p>
               DISCOVER
@@ -196,9 +200,11 @@ function App() {
               TEST
             </p>
 
-            <div className="circle">
-              <FiArrowRight size={14} strokeWidth={1.5} />
-            </div>
+            <img
+              className="figma-arrow-button"
+              src={RightButton}
+              alt="Take Test"
+            />
           </button>
         </div>
       </main>

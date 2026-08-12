@@ -1,5 +1,3 @@
-/* ================= GLOBAL ================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -1415,5 +1413,168 @@ footer p {
 
   100% {
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.figma-arrow-button {
+  width: 44px;
+  height: 44px;
+  display: block;
+}
+
+.left-button {
+  transform: scaleX(-1);
+}
+
+/* ================= HOME RESPONSIVE MATCH ================= */
+
+@media (max-width: 900px) {
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px 20px 120px;
+  }
+
+  .hero h1 {
+    position: relative;
+    z-index: 3;
+    font-size: clamp(54px, 9vw, 72px);
+    line-height: 0.92;
+    letter-spacing: -4px;
+    text-align: center;
+    transform: none !important;
+  }
+
+  .arrow-left {
+    display: none;
+  }
+
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .hero::before {
+    width: min(66vw, 520px);
+    height: min(66vw, 520px);
+    border: 1px solid #d5d7db;
+  }
+
+  .hero::after {
+    width: min(56vw, 440px);
+    height: min(56vw, 440px);
+    border: 1px solid #d5d7db;
+  }
+
+  .hero h1::after {
+    content: "Skinstric developed an A.I. that creates a highly-personalized routine tailored to what your skin needs.";
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 20px);
+    width: min(72vw, 420px);
+    transform: translateX(-50%);
+    color: #7b7f85;
+    font-size: 16px;
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .arrow-right {
+    position: absolute;
+    left: 50%;
+    right: auto;
+    top: calc(50% + 120px);
+    bottom: auto;
+    min-height: 0;
+    height: 44px;
+    padding: 0;
+    gap: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-50%);
+    z-index: 6;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .arrow-right::before {
+    content: "ENTER EXPERIENCE";
+    position: static;
+    width: auto;
+    height: auto;
+    border: none;
+    opacity: 1;
+    transform: none;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .arrow-right p,
+  .line-right-top,
+  .line-right-bottom {
+    display: none;
+  }
+
+  .arrow-right .figma-arrow-button {
+    width: 44px;
+    height: 44px;
+    display: block;
+  }
+
+  footer {
+    display: none;
+  }
+}
+/* ===== FIGMA UPLOAD GRAPHICS ===== */
+
+.upload-option::before,
+.upload-option::after {
+  display: none;
+}
+
+.upload-option > span,
+.upload-option > span::before {
+  display: none;
+}
+
+.figma-upload-icon {
+  width: 360px;
+  height: 360px;
+  object-fit: contain;
+  display: block;
+}
+/* ===== NAME / LOCATION FIGMA DIAMONDS ===== */
+
+.question-rombuses {
+  position: absolute;
+  width: 760px;
+  height: 760px;
+  object-fit: contain;
+  pointer-events: none;
+  transform-origin: center;
+  animation: rotateRombuses 18s linear infinite;
+}
+
+@keyframes rotateRombuses {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

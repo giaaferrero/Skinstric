@@ -1,4 +1,5 @@
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import QuestionDiamond from "../assets/Group 39959.svg";
 
 function DashboardPage({ onBack, onDemographics }) {
   return (
@@ -23,43 +24,38 @@ function DashboardPage({ onBack, onDemographics }) {
           </p>
         </div>
 
-        <div className="dashboard-center">
+        <div
+          className="dashboard-center"
+          style={{
+            position: "relative",
+          }}
+        >
+          <img
+            src={QuestionDiamond}
+            alt="A.I. analysis options"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              display: "block",
+            }}
+          />
+
           <button
-            className="dashboard-tile dashboard-demographics active"
             type="button"
+            aria-label="Demographics"
             onClick={onDemographics}
-          >
-            <span>DEMOGRAPHICS</span>
-          </button>
-
-          <button
-            className="dashboard-tile dashboard-skin"
-            type="button"
-          >
-            <span>
-              SKIN TYPE
-              <br />
-              DETAILS
-            </span>
-          </button>
-
-          <button
-            className="dashboard-tile dashboard-cosmetic"
-            type="button"
-          >
-            <span>
-              COSMETIC
-              <br />
-              CONCERNS
-            </span>
-          </button>
-
-          <button
-            className="dashboard-tile dashboard-weather"
-            type="button"
-          >
-            <span>WEATHER</span>
-          </button>
+            style={{
+              position: "absolute",
+              top: "17%",
+              left: "35%",
+              width: "30%",
+              height: "30%",
+              border: "none",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+          />
         </div>
 
         <button
@@ -74,7 +70,10 @@ function DashboardPage({ onBack, onDemographics }) {
           <span>BACK</span>
         </button>
 
-        <button className="dashboard-next" type="button">
+        <button
+          className="dashboard-next"
+          type="button"
+        >
           <span>GET SUMMARY</span>
 
           <div className="circle">

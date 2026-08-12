@@ -3,8 +3,10 @@ import {
   FiArrowLeft,
   FiArrowRight,
   FiCamera,
-  FiUpload,
 } from "react-icons/fi";
+
+import CameraIcon from "../assets/camera.svg";
+import GalleryIcon from "../assets/gallery.svg";
 
 function UploadPage({ onBack, onAnalyze }) {
   const fileInputRef = useRef(null);
@@ -23,8 +25,13 @@ function UploadPage({ onBack, onAnalyze }) {
   };
 
   useEffect(() => {
-    if (cameraMode === "camera" && videoRef.current && streamRef.current) {
+    if (
+      cameraMode === "camera" &&
+      videoRef.current &&
+      streamRef.current
+    ) {
       videoRef.current.srcObject = streamRef.current;
+
       videoRef.current.play().catch((error) => {
         console.error("Could not start video:", error);
       });
@@ -85,7 +92,6 @@ function UploadPage({ onBack, onAnalyze }) {
       });
 
       streamRef.current = stream;
-
       setCameraMode("camera");
     } catch (error) {
       console.error("Camera permission error:", error);
@@ -211,9 +217,11 @@ function UploadPage({ onBack, onAnalyze }) {
               className="upload-option"
               onClick={handleCameraClick}
             >
-              <div className="upload-icon">
-                <FiCamera size={32} strokeWidth={1.3} />
-              </div>
+              <img
+                className="figma-upload-icon"
+                src={CameraIcon}
+                alt="Camera"
+              />
 
               <span>
                 ALLOW A.I.
@@ -227,9 +235,11 @@ function UploadPage({ onBack, onAnalyze }) {
               className="upload-option"
               onClick={handleGalleryClick}
             >
-              <div className="upload-icon">
-                <FiUpload size={32} strokeWidth={1.3} />
-              </div>
+              <img
+                className="figma-upload-icon"
+                src={GalleryIcon}
+                alt="Gallery"
+              />
 
               <span>
                 ALLOW A.I.
